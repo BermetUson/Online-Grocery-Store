@@ -1,12 +1,23 @@
 import React from "react";
-import Logo from "../assets/logo.png";
-import Person from "../assets/person.png";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
+import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+
+import { app } from "../firebase.config";
 
 import { MdShoppingBasket } from "react-icons/md";
-import { Link } from "react-router-dom";
+import Logo from "../assets/logo.png";
+import Person from "../assets/person.png";
 
 const Header = () => {
+  const firebaseAuth = getAuth(app);
+  const provider = new GoogleAuthProvider();
+
+  const login = async () => {
+    const response = await signInWithPopup(firebaseAuth, provider);
+    console.log(response);
+  };
+
   return (
     <header className="fixed z-50 w-screen p-6 px-16">
       {/* desktop & tablet */}
@@ -37,12 +48,15 @@ const Header = () => {
             </div>
           </div>
 
-          <motion.img
-            whileTap={{ scale: 0.6 }}
-            src={Person}
-            alt="Person"
-            className="w-8 min-w-[20px] h-8 min-h-[20px] drop-shadow-xl"
-          />
+          <div className="relative">
+            <motion.img
+              whileTap={{ scale: 0.6 }}
+              src={Person}
+              alt="Person"
+              onClick={login}
+              className="w-8 min-w-[20px] h-8 min-h-[20px] drop-shadow-xl"
+            />
+          </div>
         </div>
       </div>
       {/* mobile */}
