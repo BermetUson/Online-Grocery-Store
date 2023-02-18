@@ -1,18 +1,20 @@
 import React from "react";
 import Logo from "../assets/logo.png";
 import Person from "../assets/person.png";
+import { motion } from "framer-motion";
 
 import { MdShoppingBasket } from "react-icons/md";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
     <header className="fixed z-50 w-screen p-6 px-16">
       {/* desktop & tablet */}
       <div className="hidden md:flex w-full h-full items-center justify-between">
-        <div className="flex items-center gap-2">
+        <Link to={"/"} className="flex items-center gap-2">
           <img src={Logo} alt="Logo" className="w-11 object-cover" />
           <p className="text-headingColor text-xl font-bold">City</p>
-        </div>
+        </Link>
         <div className="flex items-center gap-8">
           <ul className="flex items-center gap-8 ">
             <li className="text-base text-textColor cursor-pointer hover:text-headingColor transition-all duration-100 ease-in-out">
@@ -35,7 +37,8 @@ const Header = () => {
             </div>
           </div>
 
-          <img
+          <motion.img
+            whileTap={{ scale: 0.6 }}
             src={Person}
             alt="Person"
             className="w-8 min-w-[20px] h-8 min-h-[20px] drop-shadow-xl"
