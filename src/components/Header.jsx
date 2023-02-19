@@ -54,7 +54,7 @@ const Header = () => {
               src={Person}
               alt="Person"
               onClick={login}
-              className="w-8 min-w-[20px] h-8 min-h-[20px] drop-shadow-xl"
+              className="w-8 min-w-[20px] h-8 min-h-[20px] drop-shadow-xl cursor-pointer"
             />
           </div>
         </div>

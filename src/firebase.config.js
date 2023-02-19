@@ -9,7 +9,7 @@ const firebaseConfig = {
   projectId: "online-grocery-store-a",
   storageBucket: "online-grocery-store-a.appspot.com",
   messagingSenderId: "571360087475",
-  appId: "1:571360087475:web:2ec52c2a6d61e120b58fc6",
+  appId: "1:571360087475:web:2ec52c2a6d61e120b58fc6", 
 };
 
 const app = getApps.Length > 0 ? getApp() : initializeApp(firebaseConfig);
