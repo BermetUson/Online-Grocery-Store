@@ -8,14 +8,24 @@ import { app } from "../firebase.config";
 import { MdShoppingBasket } from "react-icons/md";
 import Logo from "../assets/logo.png";
 import Person from "../assets/person.png";
+import { useStateValue } from "../context/StateProvider";
+import { actionType } from "../context/reducer";
 
 const Header = () => {
   const firebaseAuth = getAuth(app);
   const provider = new GoogleAuthProvider();
 
+  const [{ user }, dispatch] = useStateValue();
+
   const login = async () => {
-    const response = await signInWithPopup(firebaseAuth, provider);
-    console.log(response);
+    const {
+      user: { refreshToken, providerData },
+    } = await signInWithPopup(firebaseAuth, provider);
+    dispatch({
+      type: actionType.SET_USER,
+      user: providerData[0],
+    });
+    localStorage.setItem("user", JSON.stringify(providerData[0]));
   };
 
   return (
@@ -51,10 +61,10 @@ const Header = () => {
           <div className="relative">
             <motion.img
               whileTap={{ scale: 0.6 }}
-              src={Person}
+              src={user ? user.photoURL : Person}
               alt="Person"
               onClick={login}
-              className="w-8 min-w-[20px] h-8 min-h-[20px] drop-shadow-xl cursor-pointer"
+              className="w-8 min-w-[20px] h-8 min-h-[20px] drop-shadow-xl cursor-pointer rounded-full"
             />
           </div>
         </div>
