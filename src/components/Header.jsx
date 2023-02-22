@@ -34,6 +34,15 @@ const Header = () => {
       setIsMenu(!isMenu);
     }
   };
+  const logout = () => {
+    setIsMenu(false);
+    localStorage.clear();
+
+    dispatch({
+      type: actionType.SET_USER,
+      user: null,
+    });
+  };
 
   return (
     <header className="fixed z-50 w-screen p-3 px-4 md:px-16 md:p-6">
@@ -148,7 +157,9 @@ const Header = () => {
                 </li>
               </ul>
               <p
-               className="m-2 p-2 rounded-md shadow-md flex items-center justify-center bg-gray-200 gap-3 cursor-pointer hover:bg-slate-300 transition-all duration-100 ease-in-out text-textColor text-base">
+                onClick={logout}
+                className="m-2 p-2 rounded-md shadow-md flex items-center justify-center bg-gray-200 gap-3 cursor-pointer hover:bg-slate-300 transition-all duration-100 ease-in-out text-textColor text-base"
+              >
                 Logout
                 <MdLogout />
               </p>
